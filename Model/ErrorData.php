@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * ErrorData will be saved as serialized array in lw_master
  * @author Michael Mandt <michael.mandt@logic-works.de>
  * @package agent_linkchecker
  */
@@ -12,7 +13,7 @@ class ErrorData
     protected $commandHandler;
     protected $queryHandler;
     protected $id;
-
+    
 
     public function __construct($db)
     {
@@ -32,7 +33,7 @@ class ErrorData
     public function getErrorLog()
     {
         $result = $this->queryHandler->getErrorLog();
-        return $result;
+        return unserialize($result["opt1clob"]);
     }
     
     private function existsErrorLogEntry()

@@ -11,6 +11,7 @@
     <thead>
         <tr>
             <th>Beschreibung</th>
+            <th>Item-Type</th>
             <th>Url</th>
             <th style="width: 100px;">auf Seite (ID)</th>
             <th style="width: 20px;">&nbsp;</th>
@@ -21,9 +22,10 @@
         <?php foreach($this->errorUrls as $url): ?>
         <tr>
             <td><?php echo $url["description"]; ?></td>
-            <td><?php echo $url["url"]; ?></td>
+            <td><?php echo $url["itemtype"]; ?></td>
+            <td><?php echo $url["url"]."&nbsp;"; ?></td>
             <td style="text-align: center;"><?php echo $url["page_id"]; ?></td>
-            <td><a class="cmd_url" href="<?php echo $this->baseUrl . "?index=" . $url["page_id"] . "&obj=pageitems"; ?>"><i class="icon-share-alt"></i></a></td>
+            <td><a class="cmd_url" href="<?php echo $this->baseUrl . "?index=" . $url["page_id"] . "&obj=pageitems&cmd=itemEdit&iid=". $url["id"]; ?>"><i class="icon-share-alt"></i></a></td>
         </tr>
         <?php endforeach; ?>
     </tbody>

@@ -33,13 +33,17 @@ class LinkCheckerController
         
         if($this->request->getAlnum("cmd") == "check"){
             $scaned_error_urls = \AgentLinkChecker\Classes\LinkCheck\LinkCheck::getInstance($this->db)->check();
+            
+            $errorComare = new \AgentLinkChecker\Classes\ErrorCompare\ErrorCompare($this->db);
+            $errorComare->execute($scaned_error_urls, $loggedErrors->getErrorLog());
+            
             $loggedErrors->saveErrors($scaned_error_urls);
             
             $table = $tableView->render($scaned_error_urls);
         }else{
             $result = $loggedErrors->getErrorLog();
             if($result){
-                $table = $tableView->render(unserialize($result["opt1clob"]));
+                $table = $tableView->render($result);
             }
         }
         $this->response->setOutputByKey("AgentLinkChecker", $view->render($table));

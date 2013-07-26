@@ -19,7 +19,7 @@ class QueryHandler
 
     public function getAllUrls()
     {
-        $this->db->setStatement("SELECT id, page_id, description, url FROM t:lw_items WHERE url != '' OR url IS NOT NULL ORDER BY id ");
+        $this->db->setStatement("SELECT id, page_id, description, url, itemtype FROM t:lw_items WHERE url != '' AND url IS NOT NULL ORDER BY description ");
         return $this->db->pselect();
     }
     
